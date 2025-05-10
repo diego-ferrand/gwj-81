@@ -1,8 +1,8 @@
-[gd_scene load_steps=60 format=3 uid="uid://dpkc65o5ybi5"]
+[gd_scene load_steps=60 format=3 uid="uid://b1nrvna48mo0x"]
 
-[ext_resource type="Script" uid="uid://bpwp6xwfe1ptg" path="res://player/controller.gd" id="1_sqf0m"]
-[ext_resource type="Texture2D" uid="uid://bd4snlbaernkt" path="res://player/import/base_original.png" id="2_jelw7"]
-[ext_resource type="Script" uid="uid://0vikhyccpbqn" path="res://shared/sword.gd" id="3_g1dw6"]
+[ext_resource type="Texture2D" uid="uid://d2q2a81xhykkr" path="res://enemy/import/base_original.png" id="1_2mvqj"]
+[ext_resource type="Script" uid="uid://c3gpj87opkucm" path="res://enemy/enemy.gd" id="1_ppra6"]
+[ext_resource type="Script" uid="uid://0vikhyccpbqn" path="res://shared/sword.gd" id="3_p200p"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ofsxj"]
 animation = &"attack_d"
@@ -131,7 +131,7 @@ blend_point_7/node = SubResource("AnimationNodeAnimation_26s8d")
 blend_point_7/pos = Vector2(-0.5, 0.6)
 blend_mode = 1
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_g1dw6"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ipcql"]
 states/Attack/node = SubResource("AnimationNodeBlendSpace2D_7pqkx")
 states/Attack/position = Vector2(670, 95)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_e7oew")
@@ -583,24 +583,24 @@ _data = {
 &"walk_ur": SubResource("Animation_g1dw6")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sqf0m"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jb0mw"]
 size = Vector2(14, 10)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_sqf0m"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_mqeel"]
 b = Vector2(0, 20)
 
-[node name="Player" type="CharacterBody2D" groups=["damageable", "player"]]
-script = ExtResource("1_sqf0m")
+[node name="Enemy" type="CharacterBody2D" groups=["damageable"]]
+script = ExtResource("1_ppra6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -6)
-texture = ExtResource("2_jelw7")
+texture = ExtResource("1_2mvqj")
 hframes = 7
 vframes = 8
 frame = 3
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_g1dw6")
+tree_root = SubResource("AnimationNodeStateMachine_ipcql")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Attack/blend_position = Vector2(0, 0)
 parameters/Idle/blend_position = Vector2(0, 0)
@@ -613,17 +613,25 @@ libraries = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
-shape = SubResource("RectangleShape2D_sqf0m")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
-position_smoothing_enabled = true
+shape = SubResource("RectangleShape2D_jb0mw")
 
 [node name="WeaponHitbox" type="Node2D" parent="."]
 
 [node name="Sword" type="Area2D" parent="WeaponHitbox"]
 monitoring = false
-script = ExtResource("3_g1dw6")
+script = ExtResource("3_p200p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponHitbox/Sword"]
-shape = SubResource("SegmentShape2D_sqf0m")
+shape = SubResource("SegmentShape2D_mqeel")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+
+[node name="HealthbarTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -16.0
+offset_top = -27.0
+offset_right = 16.0
+offset_bottom = -23.0
+show_percentage = false

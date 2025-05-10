@@ -58,7 +58,6 @@ func swing_sword() -> void:
 	is_attacking = true
 	sword_hitbox.monitoring = true
 
-
 	await get_tree().create_timer(attack_duration).timeout
 
 	sword_hitbox.monitoring = false
