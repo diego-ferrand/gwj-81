@@ -7,7 +7,9 @@ var is_attacking: bool = false
 var input_vector := Vector2.ZERO
 var attacjubg
 @onready var animation_tree = $AnimationTree
-@onready var sword_hitbox = $SwordHitbox
+
+@onready var hitbox_container: Node2D = $WeaponHitbox
+@onready var sword_hitbox = $WeaponHitbox/Sword
 @onready var sprite_2d = $Sprite2D
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
 
@@ -18,10 +20,10 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	input_vector = Input.get_vector("left", "right", "up", "down") 
-
+	
 	if input_vector.length_squared() > 0:
 		input_vector = input_vector.normalized()
-
+		hitbox_container.rotation = input_vector.angle()-deg_to_rad(90)
 	velocity = input_vector * speed
 	end_of_process()
 	
