@@ -591,6 +591,7 @@ b = Vector2(0, 20)
 
 [node name="Player" type="CharacterBody2D" groups=["damageable", "player"]]
 script = ExtResource("1_sqf0m")
+max_health = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -6)
@@ -627,3 +628,16 @@ script = ExtResource("3_g1dw6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponHitbox/Sword"]
 shape = SubResource("SegmentShape2D_sqf0m")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -16.0
+offset_top = -27.0
+offset_right = 16.0
+offset_bottom = -23.0
+show_percentage = false
+
+[node name="HealthBarTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="WeaponHitbox/Sword" to="WeaponHitbox/Sword" method="_on_body_entered"]
+[connection signal="timeout" from="HealthBarTimer" to="." method="_on_health_bar_timer_timeout"]

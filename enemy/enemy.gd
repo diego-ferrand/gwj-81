@@ -3,7 +3,7 @@ extends CharacterBody2D
 enum State { IDLE, FOLLOW, ATTACK, PATROL }
 
 @export var speed: float = 50.0
-@export var attack_range: float = 40.0
+@export var attack_range: float = 20.0
 @export var follow_range: float = 200.0
 @export var damage: int = 1
 @export var max_health: int = 3
@@ -15,6 +15,7 @@ var patrol_index: int = 0
 var health: int = max_health
 var player: Node2D
 
+@onready var weapon_hitbox = $WeaponHitbox
 @onready var attack_area: Area2D = $WeaponHitbox/Sword
 @onready var cooldown_timer: Timer = $AttackCooldown
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
@@ -25,6 +26,7 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")  # Player must be in "player" group
 	attack_area.monitoring = false
 	health_bar.visible = false
+	health_bar.max_value = max_health
 
 func _physics_process(delta: float) -> void:
 	if player == null: return
@@ -75,11 +77,11 @@ func follow_player(delta: float) -> void:
 	move_and_slide()
 
 func attack() -> void:
+	print("Attacking")
+	weapon_hitbox.look_at(player.global_position) 
+	weapon_hitbox.rotation -= deg_to_rad(90)
 	attack_area.monitoring = true
 	cooldown_timer.start()
-
-func _on_AttackCooldown_timeout() -> void:
-	attack_area.monitoring = false
 
 func take_damage(amount: int) -> void:
 	print("Ouch!")
@@ -91,7 +93,6 @@ func take_damage(amount: int) -> void:
 	show_health_bar()
 	health_bar.value = float(health)
 
-
 func show_health_bar() -> void:
 	health_bar.visible = true
 	healthbar_timer.start()
@@ -101,3 +102,7 @@ func _on_HealthBarTimer_timeout() -> void:
 
 func die() -> void:
 	queue_free()  # Or play death animation first
+
+
+func _on_attack_cooldown_timeout():
+	attack_area.monitoring = false

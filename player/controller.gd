@@ -2,16 +2,24 @@ extends CharacterBody2D
 
 @export var speed: float = 100.0
 @export var attack_duration: float = 0.3
+@export var max_health: int = 3
 
 var is_attacking: bool = false
 var input_vector := Vector2.ZERO
-var attacjubg
+var health: int = max_health
+
 @onready var animation_tree = $AnimationTree
 
 @onready var hitbox_container: Node2D = $WeaponHitbox
 @onready var sword_hitbox = $WeaponHitbox/Sword
 @onready var sprite_2d = $Sprite2D
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
+@onready var health_bar = $HealthBar
+@onready var health_bar_timer = $HealthBarTimer
+
+func _ready():
+	health_bar.visible = false
+	health_bar.max_value = max_health
 
 func _physics_process(delta: float) -> void:
 	if is_attacking:
@@ -48,12 +56,27 @@ func update_animation_parameters():
 	animation_tree["parameters/Walk/blend_position"] = input_vector
 	animation_tree["parameters/Attack/blend_position"] = input_vector
 	
+func take_damage(amount: int) -> void:
+	print("Ouch!")
+	health -= amount
+	if health <= 0:
+		die()
+		return
+	
+	show_health_bar()
+	health_bar.value = float(health)
+	
+func die() -> void:
+	queue_free()  
+	
+func show_health_bar() -> void:
+	health_bar.visible = true
+	health_bar_timer.start()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("primary") and not is_attacking:
 		swing_sword()
-		
-		
+	
 func swing_sword() -> void:
 	is_attacking = true
 	sword_hitbox.monitoring = true
@@ -62,3 +85,7 @@ func swing_sword() -> void:
 
 	sword_hitbox.monitoring = false
 	is_attacking = false
+
+
+func _on_health_bar_timer_timeout():
+	health_bar.visible = false
