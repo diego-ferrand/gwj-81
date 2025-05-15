@@ -1,8 +1,12 @@
-[gd_scene load_steps=60 format=3 uid="uid://dpkc65o5ybi5"]
+[gd_scene load_steps=64 format=3 uid="uid://dpkc65o5ybi5"]
 
 [ext_resource type="Script" uid="uid://bpwp6xwfe1ptg" path="res://player/controller.gd" id="1_sqf0m"]
 [ext_resource type="Texture2D" uid="uid://bd4snlbaernkt" path="res://player/import/base_original.png" id="2_jelw7"]
+[ext_resource type="Texture2D" uid="uid://b5o71nl5k07uj" path="res://player/import/healthbar_bg.png" id="3_boad6"]
 [ext_resource type="Script" uid="uid://0vikhyccpbqn" path="res://shared/sword.gd" id="3_g1dw6"]
+[ext_resource type="Texture2D" uid="uid://dy1edxpmipyy3" path="res://player/import/healthbar_fg.png" id="4_rgyib"]
+[ext_resource type="Texture2D" uid="uid://d1k1greqapau4" path="res://player/import/hud_border.png" id="4_yw30f"]
+[ext_resource type="Texture2D" uid="uid://dn5tglkt0w8f8" path="res://player/import/healthbar_panel.png" id="5_hg6s5"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ofsxj"]
 animation = &"attack_d"
@@ -593,6 +597,47 @@ b = Vector2(0, 20)
 script = ExtResource("1_sqf0m")
 max_health = 5
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="border" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -212.0
+offset_top = -128.0
+offset_right = 172.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_yw30f")
+
+[node name="Healthbar" type="TextureProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = -178.0
+offset_top = -84.0
+offset_right = -48.0
+offset_bottom = -44.0
+scale = Vector2(0.520001, 0.662392)
+value = 10.0
+texture_under = ExtResource("3_boad6")
+texture_progress = ExtResource("4_rgyib")
+
+[node name="Healthbar panel" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = -181.0
+offset_top = -93.0
+offset_right = -39.0
+offset_bottom = -53.0
+scale = Vector2(0.520001, 0.520001)
+texture = ExtResource("5_hg6s5")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -6)
 texture = ExtResource("2_jelw7")
@@ -618,7 +663,6 @@ shape = SubResource("RectangleShape2D_sqf0m")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
-position_smoothing_enabled = true
 
 [node name="WeaponHitbox" type="Node2D" parent="."]
 
@@ -628,13 +672,6 @@ script = ExtResource("3_g1dw6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponHitbox/Sword"]
 shape = SubResource("SegmentShape2D_sqf0m")
-
-[node name="HealthBar" type="ProgressBar" parent="."]
-offset_left = -16.0
-offset_top = -27.0
-offset_right = 16.0
-offset_bottom = -23.0
-show_percentage = false
 
 [node name="HealthBarTimer" type="Timer" parent="."]
 one_shot = true

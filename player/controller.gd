@@ -14,11 +14,10 @@ var health: int = max_health
 @onready var sword_hitbox = $WeaponHitbox/Sword
 @onready var sprite_2d = $Sprite2D
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
-@onready var health_bar = $HealthBar
-@onready var health_bar_timer = $HealthBarTimer
+@onready var health_bar: TextureProgressBar = $Control/Healthbar
+
 
 func _ready():
-	health_bar.visible = false
 	health_bar.max_value = max_health
 
 func _physics_process(delta: float) -> void:
@@ -63,15 +62,10 @@ func take_damage(amount: int) -> void:
 		die()
 		return
 	
-	show_health_bar()
 	health_bar.value = float(health)
 	
 func die() -> void:
 	queue_free()  
-	
-func show_health_bar() -> void:
-	health_bar.visible = true
-	health_bar_timer.start()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("primary") and not is_attacking:
@@ -85,7 +79,3 @@ func swing_sword() -> void:
 
 	sword_hitbox.monitoring = false
 	is_attacking = false
-
-
-func _on_health_bar_timer_timeout():
-	health_bar.visible = false
