@@ -6,7 +6,7 @@ extends CharacterBody2D
 
 var is_attacking: bool = false
 var input_vector := Vector2.ZERO
-var health: int = max_health
+var health: int = 1
 
 @onready var animation_tree = $AnimationTree
 
@@ -18,7 +18,9 @@ var health: int = max_health
 
 
 func _ready():
+	health = max_health 
 	health_bar.max_value = max_health
+	health_bar.value = health
 
 func _physics_process(delta: float) -> void:
 	if is_attacking:
@@ -56,8 +58,8 @@ func update_animation_parameters():
 	animation_tree["parameters/Attack/blend_position"] = input_vector
 	
 func take_damage(amount: int) -> void:
-	print("Ouch!")
 	health -= amount
+	
 	if health <= 0:
 		die()
 		return

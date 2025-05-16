@@ -595,7 +595,7 @@ b = Vector2(0, 20)
 
 [node name="Player" type="CharacterBody2D" groups=["damageable", "player"]]
 script = ExtResource("1_sqf0m")
-max_health = 5
+max_health = 10
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

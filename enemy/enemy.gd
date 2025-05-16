@@ -77,14 +77,12 @@ func follow_player(delta: float) -> void:
 	move_and_slide()
 
 func attack() -> void:
-	print("Attacking")
 	weapon_hitbox.look_at(player.global_position) 
 	weapon_hitbox.rotation -= deg_to_rad(90)
 	attack_area.monitoring = true
 	cooldown_timer.start()
 
 func take_damage(amount: int) -> void:
-	print("Ouch!")
 	health -= amount
 	if health <= 0:
 		die()
