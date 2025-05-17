@@ -1,7 +1,7 @@
 [gd_scene load_steps=60 format=3 uid="uid://b1nrvna48mo0x"]
 
-[ext_resource type="Texture2D" uid="uid://d2q2a81xhykkr" path="res://enemy/import/base_original.png" id="1_2mvqj"]
 [ext_resource type="Script" uid="uid://c3gpj87opkucm" path="res://enemy/enemy.gd" id="1_ppra6"]
+[ext_resource type="Texture2D" uid="uid://b7ykycpkb4njs" path="res://enemy/import/base_enemy.png" id="2_ppra6"]
 [ext_resource type="Script" uid="uid://0vikhyccpbqn" path="res://shared/sword.gd" id="3_p200p"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ofsxj"]
@@ -594,7 +594,7 @@ script = ExtResource("1_ppra6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -6)
-texture = ExtResource("1_2mvqj")
+texture = ExtResource("2_ppra6")
 hframes = 7
 vframes = 8
 frame = 3

@@ -1,0 +1,128 @@
+[gd_resource type="TileSet" load_steps=25 format=3 uid="uid://cg10ls3bk6o58"]
+
+[ext_resource type="Texture2D" uid="uid://8xp3tyoq4e4v" path="res://level/import/bricks.png" id="1_ngd0x"]
+[ext_resource type="Texture2D" uid="uid://d4mm0tjhpn3de" path="res://level/import/tree_long.png" id="2_084iw"]
+[ext_resource type="Texture2D" uid="uid://b0su7l5t02qfh" path="res://level/import/tree_long_2.png" id="3_esxtv"]
+[ext_resource type="Texture2D" uid="uid://d2xydcancb0yx" path="res://level/import/grass.png" id="4_83bbi"]
+[ext_resource type="Texture2D" uid="uid://bum4gxnieu003" path="res://level/import/environment.png" id="4_084iw"]
+[ext_resource type="Texture2D" uid="uid://dtsrodnl8ul7u" path="res://level/import/grassy_path2.png" id="5_blsg3"]
+[ext_resource type="Texture2D" uid="uid://b888rgdhpqkcg" path="res://level/import/grassy_path.png" id="6_vlir4"]
+[ext_resource type="Texture2D" uid="uid://d4ly4unknfhi1" path="res://level/import/grassy_stone2.png" id="7_7ivpx"]
+[ext_resource type="Texture2D" uid="uid://begrplniy3b83" path="res://level/import/grassy_stone.png" id="8_m5540"]
+[ext_resource type="Texture2D" uid="uid://cuhrrmlqp35nq" path="res://level/import/tree2_bg.png" id="9_1sf0k"]
+[ext_resource type="Texture2D" uid="uid://dlwifbxwcxvf2" path="res://level/import/tree3_bg.png" id="10_y18pf"]
+[ext_resource type="Texture2D" uid="uid://b7u62st7g0qt5" path="res://level/import/tree_bg.png" id="11_pp36k"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_acfj2"]
+texture = ExtResource("1_ngd0x")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mhb85"]
+texture = ExtResource("2_084iw")
+texture_region_size = Vector2i(86, 50)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8jd7x"]
+texture = ExtResource("3_esxtv")
+texture_region_size = Vector2i(83, 47)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_esxtv"]
+texture = ExtResource("4_084iw")
+texture_region_size = Vector2i(32, 32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hsxmu"]
+texture = ExtResource("4_83bbi")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_khhsc"]
+texture = ExtResource("5_blsg3")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1um13"]
+texture = ExtResource("6_vlir4")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3tn4m"]
+texture = ExtResource("7_7ivpx")
+texture_region_size = Vector2i(22, 42)
+0:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ipls6"]
+texture = ExtResource("8_m5540")
+texture_region_size = Vector2i(22, 41)
+0:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iyad5"]
+texture = ExtResource("9_1sf0k")
+texture_region_size = Vector2i(22, 44)
+0:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o8xdn"]
+texture = ExtResource("10_y18pf")
+texture_region_size = Vector2i(22, 42)
+0:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_imw73"]
+texture = ExtResource("11_pp36k")
+texture_region_size = Vector2i(22, 41)
+0:0/0 = 0
+0:1/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_acfj2")
+sources/2 = SubResource("TileSetAtlasSource_hsxmu")
+sources/3 = SubResource("TileSetAtlasSource_khhsc")
+sources/4 = SubResource("TileSetAtlasSource_1um13")
+sources/5 = SubResource("TileSetAtlasSource_3tn4m")
+sources/6 = SubResource("TileSetAtlasSource_ipls6")
+sources/7 = SubResource("TileSetAtlasSource_iyad5")
+sources/8 = SubResource("TileSetAtlasSource_o8xdn")
+sources/9 = SubResource("TileSetAtlasSource_imw73")
+sources/10 = SubResource("TileSetAtlasSource_mhb85")
+sources/11 = SubResource("TileSetAtlasSource_8jd7x")
+sources/12 = SubResource("TileSetAtlasSource_esxtv")
