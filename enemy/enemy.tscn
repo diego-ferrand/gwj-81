@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://b1nrvna48mo0x"]
+[gd_scene load_steps=62 format=3 uid="uid://b1nrvna48mo0x"]
 
 [ext_resource type="Script" uid="uid://c3gpj87opkucm" path="res://enemy/enemy.gd" id="1_ppra6"]
 [ext_resource type="Texture2D" uid="uid://b7ykycpkb4njs" path="res://enemy/import/base_enemy.png" id="2_ppra6"]
@@ -131,13 +131,19 @@ blend_point_7/node = SubResource("AnimationNodeAnimation_26s8d")
 blend_point_7/pos = Vector2(-0.5, 0.6)
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ipcql"]
+animation = &"dead"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ipcql"]
 states/Attack/node = SubResource("AnimationNodeBlendSpace2D_7pqkx")
 states/Attack/position = Vector2(670, 95)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_e7oew")
 states/Idle/position = Vector2(361, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_rkbax")
-states/Walk/position = Vector2(512, 100)
+states/Walk/position = Vector2(512, 97.5)
+states/dead/node = SubResource("AnimationNodeAnimation_ipcql")
+states/dead/position = Vector2(792.32, 83.775)
+graph_offset = Vector2(99.8201, -7.725)
 
 [sub_resource type="Animation" id="Animation_jayng"]
 length = 0.3
@@ -554,6 +560,22 @@ tracks/0/keys = {
 "values": [Vector2i(1, 3), Vector2i(0, 3), Vector2i(2, 3), Vector2i(0, 3)]
 }
 
+[sub_resource type="Animation" id="Animation_ppra6"]
+resource_name = "dead"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fm6fi"]
 _data = {
 &"RESET": SubResource("Animation_jayng"),
@@ -565,6 +587,7 @@ _data = {
 &"attack_u": SubResource("Animation_ebec5"),
 &"attack_ul": SubResource("Animation_yllr7"),
 &"attack_ur": SubResource("Animation_2ieo8"),
+&"dead": SubResource("Animation_ppra6"),
 &"idle_d": SubResource("Animation_jelw7"),
 &"idle_dl": SubResource("Animation_yytrb"),
 &"idle_dr": SubResource("Animation_vsij1"),
@@ -600,11 +623,12 @@ vframes = 8
 frame = 3
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+deterministic = false
 tree_root = SubResource("AnimationNodeStateMachine_ipcql")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Attack/blend_position = Vector2(0, 0)
 parameters/Idle/blend_position = Vector2(0, 0)
-parameters/Walk/blend_position = Vector2(0, 0)
+parameters/Walk/blend_position = Vector2(0.498084, 0.613079)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -637,5 +661,11 @@ offset_right = 16.0
 offset_bottom = -23.0
 show_percentage = false
 
+[node name="CorpseTimeout" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="body_entered" from="WeaponHitbox/Sword" to="WeaponHitbox/Sword" method="_on_body_entered"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="CorpseTimeout" to="." method="_on_corpse_timeout_timeout"]
