@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dpkc65o5ybi5"]
+[gd_scene load_steps=66 format=3 uid="uid://dpkc65o5ybi5"]
 
 [ext_resource type="Script" uid="uid://bpwp6xwfe1ptg" path="res://player/controller.gd" id="1_sqf0m"]
 [ext_resource type="Texture2D" uid="uid://bd4snlbaernkt" path="res://player/import/base_original.png" id="2_jelw7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dy1edxpmipyy3" path="res://player/import/healthbar_fg.png" id="4_rgyib"]
 [ext_resource type="Texture2D" uid="uid://d1k1greqapau4" path="res://player/import/hud_border.png" id="4_yw30f"]
 [ext_resource type="Texture2D" uid="uid://dn5tglkt0w8f8" path="res://player/import/healthbar_panel.png" id="5_hg6s5"]
+[ext_resource type="Shader" uid="uid://b8vl0qip1qt5g" path="res://world.gdshader" id="7_rgyib"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ofsxj"]
 animation = &"attack_d"
@@ -590,6 +591,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sqf0m"]
 size = Vector2(14, 10)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hg6s5"]
+shader = ExtResource("7_rgyib")
+
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_sqf0m"]
 b = Vector2(0, 20)
 
@@ -663,6 +667,20 @@ shape = SubResource("RectangleShape2D_sqf0m")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="TextureRect" type="ColorRect" parent="Camera2D/CanvasLayer"]
+material = SubResource("ShaderMaterial_hg6s5")
+anchors_preset = -1
+anchor_left = -0.144
+anchor_top = -0.147
+anchor_right = 0.259
+anchor_bottom = 0.269
+offset_left = -48.112
+offset_top = -39.744
+offset_right = 15369.6
+offset_bottom = 8812.69
 
 [node name="WeaponHitbox" type="Node2D" parent="."]
 
